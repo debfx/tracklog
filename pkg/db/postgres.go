@@ -211,6 +211,7 @@ func (d *Postgres) UserLogByID(user *models.User, id int) (*models.Log, error) {
 		Map(`"distance"`, &log.Distance).
 		Map(`"gpx"`, &log.GPX).
 		Where(`"id" = ?`, id).
+		Where(`"user_id" = ?`, user.ID).
 		Build()
 
 	err = tx.QueryRow(query, args...).Scan(dest...)

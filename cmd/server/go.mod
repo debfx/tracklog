@@ -5,7 +5,6 @@ replace github.com/thcyron/tracklog => ../..
 require (
 	github.com/codegangsta/negroni v1.0.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
-	github.com/gorilla/csrf v1.5.1 // indirect
 	github.com/gorilla/handlers v1.4.0 // indirect
 	github.com/julienschmidt/httprouter v1.2.0 // indirect
 	github.com/lib/pq v1.1.1 // indirect

@@ -32,29 +32,8 @@ function createForm(href, method) {
   methodField.value = method.toUpperCase();
   form.appendChild(methodField);
 
-  const csrfField = document.createElement("input");
-  csrfField.type = "hidden";
-  csrfField.name = "_csrf";
-  csrfField.value = Tracklog.csrfToken;
-  form.appendChild(csrfField);
-
   return form;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const nodes = document.querySelectorAll("form");
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
-    node.addEventListener("submit", (event) => {
-      const form = event.target;
-      const csrfField = document.createElement("input");
-      csrfField.type = "hidden";
-      csrfField.name = "_csrf";
-      csrfField.value = Tracklog.csrfToken;
-      form.appendChild(csrfField);
-    });
-  }
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const nodes = document.querySelectorAll(".logs-upload-button");

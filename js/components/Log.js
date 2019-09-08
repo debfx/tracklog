@@ -53,7 +53,6 @@ export default class Log extends React.Component {
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "X-CSRF-Token": Tracklog.csrfToken,
       },
       body: JSON.stringify({
         "name": this.state.log.get("name"),

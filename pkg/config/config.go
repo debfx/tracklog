@@ -11,7 +11,6 @@ type Config struct {
 	Server struct {
 		Development       bool   `toml:"development"`
 		ListenAddress     string `toml:"listen_address"`
-		CSRFAuthKey       string `toml:"csrf_auth_key"`
 		SigningKey        string `toml:"signing_key"`
 		MapboxAccessToken string `toml:"mapbox_access_token"`
 	} `toml:"server"`
@@ -30,9 +29,6 @@ func Read(r io.Reader) (*Config, error) {
 }
 
 func Check(config *Config) error {
-	if config.Server.CSRFAuthKey == "" {
-		return errors.New("missing server.csrf_auth_key")
-	}
 	if config.Server.SigningKey == "" {
 		return errors.New("missing server.signing_key")
 	}

@@ -10,7 +10,6 @@ import (
 
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/context"
-	"github.com/gorilla/csrf"
 	"github.com/gorilla/handlers"
 	"github.com/julienschmidt/httprouter"
 	"github.com/thcyron/tracklog"
@@ -26,7 +25,6 @@ type Server struct {
 	config      *config.Config
 	db          db.DB
 	handler     http.Handler
-	csrfHandler func(http.Handler) http.Handler
 	tmpl        *template.Template
 }
 
@@ -45,15 +43,6 @@ func New(conf *config.Config, db db.DB) (*Server, error) {
 	}
 
 	n := negroni.Classic()
-
-	csrfHandler := csrf.Protect(
-		[]byte(s.config.Server.CSRFAuthKey),
-		csrf.Secure(!s.config.Server.Development),
-		csrf.FieldName("_csrf"),
-	)
-	n.UseFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-		csrfHandler(next).ServeHTTP(w, r)
-	})
 
 	n.UseFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		handlers.HTTPMethodOverrideHandler(next).ServeHTTP(w, r)
@@ -119,8 +108,6 @@ type renderData struct {
 	ActiveTab         string
 	Breadcrumb        *Breadcrumb
 	User              *models.User
-	CSRFToken         string
-	CSRFField         template.HTML
 	MapboxAccessToken string
 	Version           string
 	Runtime           string
@@ -145,8 +132,6 @@ func (s *Server) render(w http.ResponseWriter, r *http.Request, name string) {
 		ActiveTab:         ctx.ActiveTab(),
 		Breadcrumb:        ctx.Breadcrumb(),
 		User:              ctx.User(),
-		CSRFToken:         csrf.Token(r),
-		CSRFField:         csrf.TemplateField(r),
 		MapboxAccessToken: s.config.Server.MapboxAccessToken,
 		Version:           tracklog.Version,
 		Data:              ctx.Data(),

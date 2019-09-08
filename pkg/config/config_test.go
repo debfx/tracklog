@@ -8,7 +8,6 @@ import (
 var data = []byte(`[server]
 development = true
 listen_address = ":8080"
-csrf_auth_key = "secr"
 signing_key = "secret"
 mapbox_access_token = "abc"
 
@@ -29,10 +28,6 @@ func TestRead(t *testing.T) {
 	if expected := ":8080"; c.Server.ListenAddress != expected {
 		t.Errorf("expected Server.ListenAddress = %q; got %q", expected, c.Server.ListenAddress)
 	}
-	if expected := "secr"; c.Server.CSRFAuthKey != expected {
-		t.Errorf("expected Server.CSRFAuthKey = %q; got %q", expected, c.Server.CSRFAuthKey)
-	}
-
 	if expected := "postgres"; c.DB.Driver != expected {
 		t.Errorf("expected DB.Driver = %q; got %q", expected, c.DB.Driver)
 	}

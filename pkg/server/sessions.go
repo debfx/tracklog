@@ -67,6 +67,7 @@ func (s *Server) HandlePostSignIn(w http.ResponseWriter, r *http.Request) {
 		Name:     tokenCookieName,
 		Value:    tokenString,
 		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
 	}
 	http.SetCookie(w, cookie)
 
@@ -90,6 +91,7 @@ func (s *Server) HandlePostSignOut(w http.ResponseWriter, r *http.Request) {
 		Name:     tokenCookieName,
 		Value:    "",
 		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
 	}
 	http.SetCookie(w, cookie)
 	s.redirectToSignIn(w, r)

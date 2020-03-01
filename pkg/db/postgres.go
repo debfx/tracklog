@@ -249,6 +249,7 @@ func (d *Postgres) getLogTracks(tx *sql.Tx, log *models.Log) error {
 		Map(`"duration"`, &track.Duration).
 		Map(`"distance"`, &track.Distance).
 		Where(`"log_id" = ?`, log.ID).
+		Order(`"id" ASC`).
 		Build()
 
 	rows, err := tx.Query(query, args...)
@@ -294,6 +295,7 @@ func (d *Postgres) getTrackPoints(tx *sql.Tx, track *models.Track) error {
 		Map(`"elevation"`, &point.Elevation).
 		Map(`"heartrate"`, &point.Heartrate).
 		Where(`"track_id" = ?`, track.ID).
+		Order(`"id" ASC`).
 		Build()
 
 	rows, err := tx.Query(query, args...)

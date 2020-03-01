@@ -11,7 +11,7 @@ RUN go build -o cmd/server/server ./cmd/server
 RUN go build -o cmd/control/control ./cmd/control
 
 
-FROM node:10
+FROM node:12
 
 COPY package.json .babelrc /usr/src/tracklog/
 COPY css/ /usr/src/tracklog/css/

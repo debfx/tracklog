@@ -5,12 +5,10 @@ COPY cmd/ /usr/src/tracklog/cmd/
 COPY pkg/ /usr/src/tracklog/pkg/
 
 ENV CGO_ENABLED 0
+WORKDIR /usr/src/tracklog
 
-WORKDIR /usr/src/tracklog/cmd/server
-RUN go build
-
-WORKDIR /usr/src/tracklog/cmd/control
-RUN go build
+RUN go build -o cmd/server/server ./cmd/server
+RUN go build -o cmd/control/control ./cmd/control
 
 
 FROM node:10

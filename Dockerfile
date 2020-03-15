@@ -13,12 +13,13 @@ RUN go build -o cmd/control/control ./cmd/control
 
 FROM node:12
 
+WORKDIR /usr/src/tracklog
+
 COPY package.json .babelrc /usr/src/tracklog/
+RUN npm install
+
 COPY css/ /usr/src/tracklog/css/
 COPY js/ /usr/src/tracklog/js/
-
-WORKDIR /usr/src/tracklog
-RUN npm install
 RUN npm run build
 
 

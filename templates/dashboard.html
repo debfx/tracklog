@@ -25,7 +25,7 @@
                     {{with .Tags}}
                       <span class="pull-right">
                         {{range .}}
-                          <span class="label label-primary">{{.}}</span>
+                          <a class="label label-primary" href="/tags/{{.}}">{{.}}</a>
                         {{end}}
                       </span>
                     {{end}}

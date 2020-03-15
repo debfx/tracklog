@@ -55,7 +55,7 @@ export default class LogTags extends React.Component {
       items = this.state.tags.toJS().map((tag, i) => {
         return (
           <li key={i} className="list-group-item">
-            <span className="label label-primary">{tag}</span>
+            <a className="label label-primary" href={ `/tags/${tag}` }>{tag}</a>
           </li>
         );
       });

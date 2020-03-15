@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12 kill-bottom-margin">
+    {{with .Data}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Tag {{.TagName}}</h2>
+        </div>
+        <table class="table table-bordered table-striped logs-table">
+          <thead>
+            <th>
+              Name
+              <span class="pull-right">Tags</span>
+            </th>
+            <th width="150">Date</th>
+            <th width="150" class="text-right">Duration</th>
+            <th width="150" class="text-right">Distance</th>
+          </thead>
+          <tbody>
+            {{range .Logs}}
+              <tr>
+                <td>
+                  <a href="/logs/{{.ID}}">{{.Name}}</a>
+                  {{with .Tags}}
+                    <span class="pull-right">
+                      {{range .}}
+                        <span class="label label-primary">{{.}}</span>
+                      {{end}}
+                    </span>
+                  {{end}}
+                </td>
+                <td>{{.Start}}</td>
+                <td class="text-right">{{.Duration}}</td>
+                <td class="text-right">{{.Distance}}</td>
+              </tr>
+            {{end}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="2"></th>
+              <th class="text-right">{{.Duration}}</th>
+              <th class="text-right">{{.Distance}}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    {{end}}
+  </div>
+</div>

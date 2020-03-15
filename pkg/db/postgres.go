@@ -401,6 +401,91 @@ func (d *Postgres) UserLogsByYear(user *models.User, year int) ([]*models.Log, e
 	return logs, nil
 }
 
+func (d *Postgres) UserLogTags(user *models.User) ([]string, error) {
+	var (
+		tags []string
+		tag  string
+	)
+
+	query, args, dest := sqlbuilder.Select().
+		Dialect(sqlbuilder.Postgres).
+		From(`"log_tag"`).
+		Map(`DISTINCT log_tag.tag`, &tag).
+		Join("INNER JOIN log ON log.id = log_tag.log_id").
+		Where(`"user_id" = ?`, user.ID).
+		Order(`tag ASC`).
+		Build()
+
+	rows, err := d.db.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		if err := rows.Scan(dest...); err != nil {
+			return nil, err
+		}
+		tags = append(tags, tag)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return tags, nil
+}
+
+func (d *Postgres) UserLogsByTag(user *models.User, tag string) ([]*models.Log, error) {
+	tx, err := d.db.Begin()
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback() // read-only transaction
+
+	var (
+		log  models.Log
+		logs []*models.Log
+	)
+
+	query, args, dest := sqlbuilder.Select().
+		Dialect(sqlbuilder.Postgres).
+		From(`"log"`).
+		Map(`"id"`, &log.ID).
+		Map(`"name"`, &log.Name).
+		Map(`"start"`, &log.Start).
+		Map(`"end"`, &log.End).
+		Map(`"duration"`, &log.Duration).
+		Map(`"distance"`, &log.Distance).
+		Map(`"gpx"`, &log.GPX).
+		Join("INNER JOIN log_tag ON log_tag.log_id = log.id").
+		Where(`"user_id" = ?`, user.ID).
+		Where(`tag = ?`, tag).
+		Order(`"start" DESC`).
+		Build()
+
+	rows, err := tx.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		if err := rows.Scan(dest...); err != nil {
+			rows.Close()
+			return nil, err
+		}
+		l := new(models.Log)
+		*l = log
+		logs = append(logs, l)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	for _, log := range logs {
+		if err := d.getLogTags(tx, log); err != nil {
+			return nil, err
+		}
+	}
+
+	return logs, nil
+}
+
 func (d *Postgres) AddUserLog(user *models.User, log *models.Log) error {
 	tx, err := d.db.Begin()
 	if err != nil {

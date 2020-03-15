@@ -20,6 +20,7 @@
         <ul class="nav navbar-nav">
           <li class="{{if eq .ActiveTab "dashboard"}}active{{end}}"><a href="/">Dashboard</a></li>
           <li class="{{if eq .ActiveTab "logs"}}active{{end}}"><a href="/logs">Logs</a></li>
+          <li class="{{if eq .ActiveTab "tags"}}active{{end}}"><a href="/tags">Tags</a></li>
         </ul>
         <div class="navbar-left navbar-upload-log-button">
           <button class="btn btn-primary navbar-btn logs-upload-button" data-text-upload="Upload Logs" data-text-uploading="Uploading Logs …">Upload Logs</button>

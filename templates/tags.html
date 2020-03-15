@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-12 kill-bottom-margin">
+    {{with .Data.Tags}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Tags</h2>
+        </div>
+        <table class="table table-bordered table-striped logs-table">
+          <thead>
+            <th>Name</th>
+          </thead>
+          <tbody>
+            {{range .}}
+              <tr>
+                <td>
+                  <a href="/tags/{{.}}">{{.}}</a>
+                </td>
+              </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      <div class="panel panel-default">
+        <div class="panel-body kill-bottom-margin">
+          <p class="text-muted">
+            No tags
+          </p>
+        </div>
+      </div>
+    {{end}}
+  </div>
+</div>

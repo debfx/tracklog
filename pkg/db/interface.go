@@ -15,6 +15,8 @@ type DB interface {
 	UserLogYears(user *models.User) ([]int, error)
 	UserLogByID(user *models.User, id int) (*models.Log, error)
 	UserLogsByYear(user *models.User, year int) ([]*models.Log, error)
+	UserLogTags(user *models.User) ([]string, error)
+	UserLogsByTag(user *models.User, tag string) ([]*models.Log, error)
 	AddUserLog(user *models.User, log *models.Log) error
 	UpdateLog(log *models.Log) error
 	DeleteLog(log *models.Log) error

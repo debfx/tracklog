@@ -64,6 +64,8 @@ func New(conf *config.Config, db db.DB) (*Server, error) {
 	r.GET("/logs/:id", s.wrapHandler(s.HandleGetLog))
 	r.PATCH("/logs/:id", s.wrapHandler(s.HandlePatchLog))
 	r.DELETE("/logs/:id", s.wrapHandler(s.HandleDeleteLog))
+	r.GET("/tags", s.wrapHandler(s.HandleGetTags))
+	r.GET("/tags/:tag", s.wrapHandler(s.HandleGetTag))
 	r.GET("/", s.wrapHandler(s.HandleDashboard))
 	n.UseHandler(r)
 

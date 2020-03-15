@@ -1,6 +1,6 @@
 module github.com/thcyron/tracklog
 
-go 1.13
+go 1.14
 
 require (
 	github.com/codegangsta/negroni v1.0.0
@@ -13,5 +13,6 @@ require (
 	github.com/naoina/toml v0.1.1
 	github.com/thcyron/gpx v0.0.0-20160210223831-f95a7bb694cc
 	github.com/thcyron/sqlbuilder v3.0.0+incompatible
-	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
+	golang.org/x/crypto v0.0.0-20200311171314-f7b00557c8c4
+	golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527 // indirect
 )

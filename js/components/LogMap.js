@@ -10,8 +10,8 @@ export default class LogMap extends React.Component {
 
     let layer;
     if (this.props.mapboxAccessToken) {
-      layer = Leaflet.tileLayer(`https://api.mapbox.com/v4/mapbox.outdoors/{z}/{x}/{y}.png?access_token=${this.props.mapboxAccessToken}`, {
-        attribution: `<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>`,
+      layer = Leaflet.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}?access_token=${this.props.mapboxAccessToken}`, {
+        attribution: `<a href="https://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>`,
       });
     } else {
       layer = Leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");

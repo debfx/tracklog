@@ -156,6 +156,13 @@ func (s *Server) render(w http.ResponseWriter, r *http.Request, name string) {
 	data.Content = template.HTML(buf.String())
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Content-Security-Policy", "default-src 'self'; "+
+		"script-src 'self' 'unsafe-inline'; "+
+		"style-src 'self' 'unsafe-inline'; "+
+		"img-src 'self' data: https://api.mapbox.com https://*.tile.openstreetmap.org; "+
+		"form-action 'self';")
+	w.Header().Set("X-Frame-Options", "SAMEORIGIN")
+	w.Header().Set("Referrer-Policy", "same-origin")
 
 	if err := tmpl.ExecuteTemplate(w, "layout.html", data); err != nil {
 		panic(err)

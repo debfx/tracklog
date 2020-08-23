@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/lib/pq"
-	"github.com/thcyron/sqlbuilder"
+	"github.com/thcyron/sqlbuilder/v4"
 	"github.com/thcyron/tracklog/pkg/models"
 )
 

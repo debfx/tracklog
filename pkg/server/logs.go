@@ -269,6 +269,21 @@ func (s *Server) HandleGetLog(w http.ResponseWriter, r *http.Request) {
 	for _, track := range log.Tracks {
 		points := track.Points
 
+		for i, point := range points {
+			// smooth elevation
+			smoothElevationNum := 0
+			smoothElevationSum := float64(0)
+			for j := -5 + 1; j <= 0; j++ {
+				if (i + j >= 0) && (points[i + j].Elevation != 0) {
+					smoothElevationNum++
+					smoothElevationSum += points[i + j].Elevation
+				}
+			}
+			if smoothElevationNum != 0 {
+				point.Elevation = smoothElevationSum / float64(smoothElevationNum)
+			}
+		}
+
 		if performReduce {
 			rdpPoints := make([]rdp.Point, 0, len(track.Points))
 			for _, point := range track.Points {

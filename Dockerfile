@@ -11,7 +11,7 @@ RUN go build -o cmd/server/server ./cmd/server
 RUN go build -o cmd/control/control ./cmd/control
 
 
-FROM node:12
+FROM node:14
 
 WORKDIR /usr/src/tracklog
 

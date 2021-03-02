@@ -9,24 +9,24 @@
     "production:build:js": "NODE_ENV=production browserify -t babelify js/tracklog.js | uglifyjs -m -c > public/app.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.6",
-    "@babel/preset-env": "^7.8.6",
-    "@babel/preset-react": "^7.8.3",
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-react": "^7.12.13",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
-    "uglify-js": "^3.8.0",
-    "node-sass": "^4.13.1"
+    "browserify": "^17.0.0",
+    "uglify-js": "^3.13.0",
+    "node-sass": "^5.0.0"
   },
   "dependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "flux": "^3.1.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "flux": "^4.0.1",
     "bootstrap-sass": "^3.4.1",
-    "leaflet": "^1.6.0",
-    "whatwg-fetch": "^3.0.0",
+    "leaflet": "^1.7.1",
+    "whatwg-fetch": "^3.6.0",
     "immutable": "^3.8.2",
-    "highcharts": "^8.0.0",
+    "highcharts": "^9.0.1",
     "classnames": "^2.2.6"
   }
 }

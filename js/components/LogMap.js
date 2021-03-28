@@ -4,6 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Leaflet from "leaflet";
 
+const COLORS = ["red", "blue", "purple", "teal", "maroon"];
+
 export default class LogMap extends React.Component {
   componentDidMount() {
     this.map = Leaflet.map(ReactDOM.findDOMNode(this));
@@ -17,6 +19,7 @@ export default class LogMap extends React.Component {
       layer = Leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
     }
 
+    this.polylines = [];
     this.map.addLayer(layer);
     this.updateMap();
   }
@@ -27,9 +30,10 @@ export default class LogMap extends React.Component {
   }
 
   updateMap() {
-    if (this.multiPolyline) {
-      this.map.removeLayer(this.multiPolyline);
-    }
+    this.polylines.forEach(function(polyline) {
+      this.map.removeLayer(polyline);
+    });
+    this.polylines = [];
 
     const latlngs = this.props.log.get("tracks").map((track) => {
       return track.map((point) => {
@@ -37,9 +41,13 @@ export default class LogMap extends React.Component {
       });
     }).toJS();
 
-    this.multiPolyline = Leaflet.polyline(latlngs, { color: "red", weight: 3, opacity: 0.8 });
-    this.multiPolyline.addTo(this.map);
-    this.map.fitBounds(this.multiPolyline.getBounds());
+    for (var i = 0; i < latlngs.length; i++) {
+        var polyline = Leaflet.polyline(latlngs[i], { color: COLORS[i % COLORS.length], weight: 3, opacity: 0.8 });
+        this.polylines.push(polyline);
+        polyline.addTo(this.map);
+    }
+    var multiPolyline = Leaflet.polyline(latlngs);
+    this.map.fitBounds(multiPolyline.getBounds());
   }
 
   render() {

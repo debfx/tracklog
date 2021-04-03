@@ -41,12 +41,12 @@ export default class LogMap extends React.Component {
       });
     }).toJS();
 
-    for (var i = 0; i < latlngs.length; i++) {
-        var polyline = Leaflet.polyline(latlngs[i], { color: COLORS[i % COLORS.length], weight: 3, opacity: 0.8 });
+    for (let i = 0; i < latlngs.length; i++) {
+        let polyline = Leaflet.polyline(latlngs[i], { color: COLORS[i % COLORS.length], weight: 3, opacity: 0.8 });
         this.polylines.push(polyline);
         polyline.addTo(this.map);
     }
-    var multiPolyline = Leaflet.polyline(latlngs);
+    let multiPolyline = Leaflet.polyline(latlngs);
     this.map.fitBounds(multiPolyline.getBounds());
   }
 

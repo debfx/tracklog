@@ -30,9 +30,9 @@ export default class LogMap extends React.Component {
   }
 
   updateMap() {
-    this.polylines.forEach(function(polyline) {
+    for (const polyline of this.polylines) {
       this.map.removeLayer(polyline);
-    });
+    }
     this.polylines = [];
 
     const latlngs = this.props.log.get("tracks").map((track) => {

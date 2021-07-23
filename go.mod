@@ -4,8 +4,8 @@ go 1.14
 
 require (
 	github.com/codegangsta/negroni v1.0.0
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/felixge/httpsnoop v1.0.2 // indirect
+	github.com/golang-jwt/jwt v3.2.1+incompatible
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/handlers v1.5.1
 	github.com/julienschmidt/httprouter v1.3.0

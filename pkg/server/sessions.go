@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/thcyron/tracklog/pkg/models"
 	"golang.org/x/crypto/bcrypt"
 )

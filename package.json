@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "build": "npm run build:css && npm run build:js",
-    "build:css": "node-sass --output-style compressed css/tracklog.scss public/app.css",
+    "build:css": "sass --style compressed css/tracklog.scss public/app.css",
     "build:js": "browserify -t babelify -d js/tracklog.js > public/app.js",
     "production:build": "npm run build:css && npm run production:build:js",
     "production:build:js": "NODE_ENV=production browserify -t babelify js/tracklog.js | uglifyjs -m -c > public/app.js"
@@ -16,13 +16,13 @@
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "uglify-js": "^3.13.0",
-    "node-sass": "^7.0.1"
+    "sass": "^1.54.5"
   },
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "flux": "^4.0.1",
-    "bootstrap-sass": "^3.4.1",
+    "bootstrap-sass": "^3.4.3",
     "leaflet": "^1.7.1",
     "whatwg-fetch": "^3.6.0",
     "immutable": "^3.8.2",

@@ -8,7 +8,6 @@ import (
 	"path"
 	"time"
 
-	"github.com/codegangsta/negroni"
 	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/julienschmidt/httprouter"
@@ -16,6 +15,7 @@ import (
 	"github.com/thcyron/tracklog/pkg/config"
 	"github.com/thcyron/tracklog/pkg/db"
 	"github.com/thcyron/tracklog/pkg/models"
+	"github.com/urfave/negroni/v3"
 )
 
 // DataDir points to the directory where the public/ and templates/ directories are.

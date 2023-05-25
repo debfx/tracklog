@@ -1,4 +1,4 @@
-FROM golang:1.19
+FROM golang:1.20
 
 COPY go.* *.go /usr/src/tracklog/
 COPY cmd/ /usr/src/tracklog/cmd/

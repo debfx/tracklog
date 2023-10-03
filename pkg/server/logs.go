@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thcyron/tracklog/pkg/geo"
-	"github.com/thcyron/tracklog/pkg/heartrate"
-	"github.com/thcyron/tracklog/pkg/models"
-	"github.com/thcyron/tracklog/pkg/rdp"
-	"github.com/thcyron/tracklog/pkg/utils"
+	"github.com/debfx/tracklog/pkg/geo"
+	"github.com/debfx/tracklog/pkg/heartrate"
+	"github.com/debfx/tracklog/pkg/models"
+	"github.com/debfx/tracklog/pkg/rdp"
+	"github.com/debfx/tracklog/pkg/utils"
 )
 
 const logTimeFormat = "2006-01-02 15:04:05"
@@ -274,9 +274,9 @@ func (s *Server) HandleGetLog(w http.ResponseWriter, r *http.Request) {
 			smoothElevationNum := 0
 			smoothElevationSum := float64(0)
 			for j := -5 + 1; j <= 0; j++ {
-				if (i + j >= 0) && (points[i + j].Elevation != 0) {
+				if (i+j >= 0) && (points[i+j].Elevation != 0) {
 					smoothElevationNum++
-					smoothElevationSum += points[i + j].Elevation
+					smoothElevationSum += points[i+j].Elevation
 				}
 			}
 			if smoothElevationNum != 0 {

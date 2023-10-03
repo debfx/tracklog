@@ -1,6 +1,6 @@
 package db
 
-import "github.com/thcyron/tracklog/pkg/models"
+import "github.com/debfx/tracklog/pkg/models"
 
 type DB interface {
 	Open(dsn string) error

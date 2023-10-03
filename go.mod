@@ -1,4 +1,4 @@
-module github.com/thcyron/tracklog
+module github.com/debfx/tracklog
 
 go 1.17
 

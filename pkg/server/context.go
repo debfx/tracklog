@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/debfx/tracklog/pkg/models"
 	"github.com/gorilla/context"
 	"github.com/julienschmidt/httprouter"
-	"github.com/thcyron/tracklog/pkg/models"
 )
 
 type contextKey int

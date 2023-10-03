@@ -8,13 +8,13 @@ import (
 	"path"
 	"time"
 
+	"github.com/debfx/tracklog"
+	"github.com/debfx/tracklog/pkg/config"
+	"github.com/debfx/tracklog/pkg/db"
+	"github.com/debfx/tracklog/pkg/models"
 	"github.com/gorilla/context"
 	"github.com/gorilla/handlers"
 	"github.com/julienschmidt/httprouter"
-	"github.com/thcyron/tracklog"
-	"github.com/thcyron/tracklog/pkg/config"
-	"github.com/thcyron/tracklog/pkg/db"
-	"github.com/thcyron/tracklog/pkg/models"
 	"github.com/urfave/negroni/v3"
 )
 
@@ -22,10 +22,10 @@ import (
 var DataDir = "."
 
 type Server struct {
-	config      *config.Config
-	db          db.DB
-	handler     http.Handler
-	tmpl        *template.Template
+	config  *config.Config
+	db      db.DB
+	handler http.Handler
+	tmpl    *template.Template
 }
 
 func New(conf *config.Config, db db.DB) (*Server, error) {

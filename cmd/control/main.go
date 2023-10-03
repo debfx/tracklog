@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/thcyron/tracklog/pkg/config"
-	"github.com/thcyron/tracklog/pkg/db"
+	"github.com/debfx/tracklog/pkg/config"
+	"github.com/debfx/tracklog/pkg/db"
 )
 
 var (

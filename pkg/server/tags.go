@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/thcyron/tracklog/pkg/utils"
+	"github.com/debfx/tracklog/pkg/utils"
 )
 
 type tagsData struct {
@@ -64,7 +64,7 @@ func (s *Server) HandleGetTag(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var (
-		data tagData
+		data     tagData
 		duration uint
 		distance uint
 	)

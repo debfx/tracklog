@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/debfx/tracklog/pkg/models"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/thcyron/tracklog/pkg/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

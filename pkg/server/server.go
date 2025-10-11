@@ -44,6 +44,24 @@ func New(conf *config.Config, db db.DB) (*Server, error) {
 
 	n := negroni.Classic()
 
+	csrfProtection := http.NewCrossOriginProtection()
+	csrfHandler := func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if err := csrfProtection.Check(r); err != nil {
+				// Emulate gorilla's unauthorizedHandler.
+				http.Error(w, fmt.Sprintf("%s - %s",
+					http.StatusText(http.StatusForbidden), err),
+					http.StatusForbidden)
+				return
+			}
+
+			h.ServeHTTP(w, r)
+		})
+	}
+	n.UseFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+		csrfHandler(next).ServeHTTP(w, r)
+	})
+
 	n.UseFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		handlers.HTTPMethodOverrideHandler(next).ServeHTTP(w, r)
 	})

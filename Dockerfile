@@ -11,7 +11,7 @@ RUN go build -o cmd/server/server ./cmd/server
 RUN go build -o cmd/control/control ./cmd/control
 
 
-FROM node:18-slim
+FROM docker.io/library/node:22-slim
 
 WORKDIR /usr/src/tracklog
 

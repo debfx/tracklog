@@ -1,4 +1,4 @@
-FROM golang:1.25
+FROM docker.io/library/golang:1.27
 
 COPY go.* *.go /usr/src/tracklog/
 COPY cmd/ /usr/src/tracklog/cmd/
